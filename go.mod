@@ -57,8 +57,6 @@ require (
 	gorm.io/gorm v1.25.11 // indirect
 )
 
-require github.com/stretchr/testify v1.9.0
-
 replace (
 	github.com/cko-recruitment/payment-gateway-challenge-go/bank => ./bank
 	github.com/cko-recruitment/payment-gateway-challenge-go/common => ./common
