@@ -29,7 +29,6 @@ type storage struct {
 }
 
 // New returns a fresh Storage object.
-// NB: despite error being returned, currently no errors are provided.
 //	db	a (possibly nil) pointer to a gorm object
 //	returns (a fresh storage object, any error occurred)
 func New(db *gorm.DB) (Storage, error) {
@@ -38,6 +37,10 @@ func New(db *gorm.DB) (Storage, error) {
 		logger.Print("no external DB connection, temporary session-limited payments cache only")
 	} else {
 		logger.Print("running in persistent storage mode")
+		err := db.AutoMigrate(&common.PaymentResponse{})
+		if err != nil {
+			return nil, err
+		}
 	}
 	return &storage{
 		cache: make(map[common.ID]common.PaymentResponse),

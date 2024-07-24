@@ -73,7 +73,7 @@ cd $(dirname $0)/..
 $SUDO docker-compose up -d
 coproc PAYMENT_PROC { go run main.go redirects.go ; }
 echo "Payment processor at $PAYMENT_PROC_PID"
-sleep 2
+sleep 4
 FAILS=0
 
 function checkForFail() {
